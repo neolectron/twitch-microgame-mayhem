@@ -1,11 +1,10 @@
-import { Route as RootRoute, Link } from '@tanstack/router';
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 
-export const Route = new RootRoute('/*', {
+export const Route = createFileRoute("/404")({
   component: () => {
     useEffect(() => {
-      console.error(
-        "404 Error: User attempted to access non-existent route"
-      );
+      console.error("404 Error: User attempted to access non-existent route");
     }, []);
 
     return (

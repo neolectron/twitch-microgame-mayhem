@@ -1,8 +1,7 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "../components/landing/Hero";
 
-import { Route as RootRoute } from '@tanstack/router';
-import { Hero } from '@/components/landing/Hero';
-
-export const Route = new RootRoute('/', {
+export const Route = createFileRoute("/")({
   component: () => (
     <div className="min-h-screen">
       <Hero />

@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "browser": {
+      "command": "npx",
+      "args": ["@agentdeskai/browser-tools-mcp"],
+      "env": {},
+      "type": "stdio"
+    }
+  }
+}
