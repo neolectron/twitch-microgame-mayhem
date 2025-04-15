@@ -1,6 +1,5 @@
-
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/router";
 import { useToast } from "@/hooks/use-toast";
 
 const TwitchLoginButton: React.FC = () => {

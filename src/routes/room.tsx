@@ -1,9 +1,8 @@
-
-import { FileRoute } from '@tanstack/router';
+import { FileRoute, Link } from '@tanstack/router';
+import { useState } from 'react';
 import { CursorParty } from '@/components/room/CursorParty';
 import { VoteToStart } from '@/components/room/VoteToStart';
 import { Users, ArrowLeft } from 'lucide-react';
-import { Link } from '@tanstack/router';
 
 export const Route = new FileRoute('/room/$roomId').createRoute({
   component: () => {

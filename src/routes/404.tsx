@@ -1,5 +1,5 @@
 
-import { FileRoute } from '@tanstack/router';
+import { FileRoute, Link } from '@tanstack/router';
 import { useEffect } from 'react';
 
 export const Route = new FileRoute('/*').createRoute({
