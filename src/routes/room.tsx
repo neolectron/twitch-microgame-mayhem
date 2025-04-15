@@ -1,3 +1,4 @@
+
 import { FileRoute, Link } from '@tanstack/router';
 import { useState } from 'react';
 import { CursorParty } from '@/components/room/CursorParty';

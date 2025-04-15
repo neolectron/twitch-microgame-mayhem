@@ -3,14 +3,17 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Router, RouterProvider } from '@tanstack/router';
+import { createRouter, RouterProvider } from '@tanstack/router';
 import { routeTree } from './routeTree.gen';
 
 const queryClient = new QueryClient();
 
-const router = new Router({
+const router = createRouter({ 
   routeTree,
   defaultPreload: 'intent',
+  context: {
+    queryClient,
+  },
 });
 
 declare module '@tanstack/router' {

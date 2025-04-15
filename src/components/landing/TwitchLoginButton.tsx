@@ -1,9 +1,10 @@
+
 import React from "react";
-import { useNavigate } from "@tanstack/router";
+import { useRouter } from "@tanstack/router";
 import { useToast } from "@/hooks/use-toast";
 
 const TwitchLoginButton: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { toast } = useToast();
   
   const handleTwitchLogin = async () => {
@@ -16,7 +17,7 @@ const TwitchLoginButton: React.FC = () => {
     
     // Simulate login delay then redirect
     setTimeout(() => {
-      navigate("/lobby");
+      router.navigate({ to: "/lobby" });
     }, 2000);
   };
   
