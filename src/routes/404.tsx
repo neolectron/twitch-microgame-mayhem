@@ -1,8 +1,6 @@
+import { Route as RootRoute, Link } from '@tanstack/router';
 
-import { FileRoute, Link } from '@tanstack/router';
-import { useEffect } from 'react';
-
-export const Route = new FileRoute('/*').createRoute({
+export const Route = new RootRoute('/*', {
   component: () => {
     useEffect(() => {
       console.error(

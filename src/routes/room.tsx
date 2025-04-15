@@ -1,11 +1,11 @@
 
-import { FileRoute, Link } from '@tanstack/router';
+import { Route as RootRoute, Link } from '@tanstack/router';
 import { useState } from 'react';
 import { CursorParty } from '@/components/room/CursorParty';
 import { VoteToStart } from '@/components/room/VoteToStart';
 import { Users, ArrowLeft } from 'lucide-react';
 
-export const Route = new FileRoute('/room/$roomId').createRoute({
+export const Route = new RootRoute('/room/$roomId', {
   component: () => {
     const { roomId } = Route.useParams();
     const [gameStarted, setGameStarted] = useState(false);
