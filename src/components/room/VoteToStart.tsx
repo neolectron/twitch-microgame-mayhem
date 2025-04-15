@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Users, Play } from 'lucide-react';
+import { Check, Play } from 'lucide-react';
 
 interface VoteToStartProps {
   onGameStart: () => void;
@@ -8,42 +8,42 @@ interface VoteToStartProps {
 
 export const VoteToStart: React.FC<VoteToStartProps> = ({ onGameStart }) => {
   const [totalPlayers, setTotalPlayers] = useState(6); // Total including fake players
-  const [votedPlayers, setVotedPlayers] = useState(0);
-  const [hasVoted, setHasVoted] = useState(false);
+  const [readyPlayers, setReadyPlayers] = useState(0);
+  const [isReady, setIsReady] = useState(false);
   const [countdown, setCountdown] = useState<number | null>(null);
   
-  // Calculate vote percentage
-  const votePercentage = (votedPlayers / totalPlayers) * 100;
-  const voteThreshold = 60; // 60% of players need to vote to start
+  // Calculate ready percentage
+  const readyPercentage = (readyPlayers / totalPlayers) * 100;
+  const readyThreshold = 80; // 80% of players need to be ready to start
   
-  // Handle user vote
-  const handleVote = () => {
-    if (hasVoted) return;
+  // Handle player ready status
+  const handleReady = () => {
+    if (isReady) return;
     
-    setHasVoted(true);
-    setVotedPlayers(prev => prev + 1);
+    setIsReady(true);
+    setReadyPlayers(prev => prev + 1);
     
-    // In a real app, would send this vote to PartyKit server
+    // In a real app, would send this ready status to PartyKit server
   };
   
-  // Simulate other players voting randomly
+  // Simulate other players getting ready randomly
   useEffect(() => {
     const interval = setInterval(() => {
-      if (Math.random() > 0.7 && votedPlayers < totalPlayers - 1) {
-        setVotedPlayers(prev => Math.min(prev + 1, totalPlayers - 1));
+      if (Math.random() > 0.7 && readyPlayers < totalPlayers - 1) {
+        setReadyPlayers(prev => Math.min(prev + 1, totalPlayers - 1));
       }
     }, 2000);
     
     return () => clearInterval(interval);
-  }, [totalPlayers, votedPlayers]);
+  }, [totalPlayers, readyPlayers]);
   
-  // Check if vote threshold reached
+  // Check if ready threshold reached
   useEffect(() => {
-    if (votePercentage >= voteThreshold && countdown === null) {
-      // Start countdown
-      setCountdown(5);
+    if (readyPercentage >= readyThreshold && countdown === null) {
+      // Start 20-second countdown
+      setCountdown(20);
     }
-  }, [votePercentage, countdown]);
+  }, [readyPercentage, countdown]);
   
   // Handle countdown
   useEffect(() => {
@@ -66,14 +66,14 @@ export const VoteToStart: React.FC<VoteToStartProps> = ({ onGameStart }) => {
       <h2 className="text-xl font-bold mb-4 text-center">Ready to Play?</h2>
       
       <div className="flex items-center justify-center gap-2 mb-4">
-        <Users size={20} />
-        <span>{votedPlayers} / {totalPlayers} players voted</span>
+        <Check size={20} />
+        <span>{readyPlayers} / {totalPlayers} players ready</span>
       </div>
       
       <div className="relative h-4 bg-muted rounded-full overflow-hidden mb-6">
         <div 
           className="absolute top-0 left-0 h-full bg-game-primary transition-all duration-300"
-          style={{ width: `${votePercentage}%` }}
+          style={{ width: `${readyPercentage}%` }}
         />
       </div>
       
@@ -85,18 +85,18 @@ export const VoteToStart: React.FC<VoteToStartProps> = ({ onGameStart }) => {
       ) : (
         <button
           className={`game-button w-full flex items-center justify-center gap-2 ${
-            hasVoted ? 'opacity-50 cursor-not-allowed' : ''
+            isReady ? 'opacity-50 cursor-not-allowed' : ''
           }`}
-          onClick={handleVote}
-          disabled={hasVoted}
+          onClick={handleReady}
+          disabled={isReady}
         >
           <Play size={20} />
-          <span>{hasVoted ? 'Vote Cast!' : 'Vote to Start Game'}</span>
+          <span>{isReady ? 'Ready!' : 'I am Ready'}</span>
         </button>
       )}
       
       <p className="text-sm text-muted-foreground mt-4 text-center">
-        Game will start when {voteThreshold}% of players vote
+        Game will start when {readyThreshold}% of players are ready
       </p>
     </div>
   );
